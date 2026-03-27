@@ -25,14 +25,16 @@ nav.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Contact form fake submit
+// Contact form → Google Sheet
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyhyWU53-LEXVcmF8Yoh_F-9KzmxCXjSk_4sziHKH6Z4WJwBmV7iUNagMXEaxLjnzONJw/exec';
+
 const form = document.getElementById('contactForm');
 const successMsg = document.getElementById('formSuccess');
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Basic validation
+  // Validazione
   const required = form.querySelectorAll('[required]');
   let valid = true;
   required.forEach(field => {
@@ -43,21 +45,37 @@ form.addEventListener('submit', (e) => {
       field.style.borderColor = '';
     }
   });
-
   if (!valid) return;
 
-  // Simulate send
   const submitBtn = form.querySelector('[type="submit"]');
   submitBtn.disabled = true;
   submitBtn.querySelector('span').textContent = 'Invio in corso...';
 
-  setTimeout(() => {
+  const payload = {
+    nome:      form.nome.value.trim(),
+    azienda:   form.azienda.value.trim(),
+    email:     form.email.value.trim(),
+    telefono:  form.telefono.value.trim(),
+    interesse: form.interesse.value,
+    messaggio: form.messaggio.value.trim()
+  };
+
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
     form.reset();
     successMsg.classList.add('visible');
+    setTimeout(() => successMsg.classList.remove('visible'), 6000);
+  } catch (err) {
+    alert('Errore di rete. Riprova o contattaci direttamente per email.');
+  } finally {
     submitBtn.disabled = false;
     submitBtn.querySelector('span').textContent = 'Invia Richiesta';
-    setTimeout(() => successMsg.classList.remove('visible'), 5000);
-  }, 1200);
+  }
 });
 
 // Scroll reveal — product cards con entrata sfalsata
