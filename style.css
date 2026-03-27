@@ -864,6 +864,37 @@ nav ul li a:hover {
 }
 
 /* ===========================
+   SCROLL ANIMATIONS
+=========================== */
+
+/* Stato iniziale */
+.anim-left {
+  opacity: 0;
+  transform: translateX(-48px) translateY(16px);
+  transition: opacity 0.6s ease var(--delay, 0ms), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms);
+}
+
+.anim-right {
+  opacity: 0;
+  transform: translateX(48px) translateY(16px);
+  transition: opacity 0.6s ease var(--delay, 0ms), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms);
+}
+
+.anim-up {
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition: opacity 0.55s ease var(--delay, 0ms), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms);
+}
+
+/* Stato visibile */
+.card-visible.anim-left,
+.card-visible.anim-right,
+.card-visible.anim-up {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===========================
    RESPONSIVE
 =========================== */
 @media (max-width: 900px) {

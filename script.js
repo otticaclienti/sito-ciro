@@ -60,30 +60,66 @@ form.addEventListener('submit', (e) => {
   }, 1200);
 });
 
-// Scroll reveal animation
-const observer = new IntersectionObserver((entries) => {
+// Scroll reveal — product cards con entrata sfalsata
+const cardObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-      observer.unobserve(entry.target);
+      entry.target.classList.add('card-visible');
+      cardObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.product-card').forEach((card, i) => {
+  // Alterna: pari da sinistra, dispari da destra, centrale dal basso
+  const col = i % 3;
+  if (col === 0) card.classList.add('anim-left');
+  else if (col === 2) card.classList.add('anim-right');
+  else card.classList.add('anim-up');
+  card.style.setProperty('--delay', `${i * 100}ms`);
+  cardObserver.observe(card);
+});
+
+// Scroll reveal generico per service-item e testimonial
+const genericObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('card-visible');
+      genericObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.product-card, .service-item, .testimonial').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  observer.observe(el);
+document.querySelectorAll('.service-item, .testimonial').forEach((el, i) => {
+  el.classList.add('anim-up');
+  el.style.setProperty('--delay', `${i * 80}ms`);
+  genericObserver.observe(el);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.revealed, .product-card, .service-item, .testimonial').forEach(el => {
-    el.classList.add('revealed');
+// Counter animato per le statistiche hero
+function animateCounter(el, target, duration = 1200) {
+  let start = 0;
+  const step = timestamp => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(ease * target) + '+';
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.stat strong').forEach(el => {
+        const val = parseInt(el.textContent);
+        if (!isNaN(val)) animateCounter(el, val);
+      });
+      statsObserver.unobserve(entry.target);
+    }
   });
-});
+}, { threshold: 0.5 });
 
-// Add revealed class style
-const style = document.createElement('style');
-style.textContent = '.revealed { opacity: 1 !important; transform: none !important; }';
-document.head.appendChild(style);
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) statsObserver.observe(heroStats);
