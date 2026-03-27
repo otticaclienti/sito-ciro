@@ -3,159 +3,228 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ferro & Macchine – Agente di Commercio</title>
-  <meta name="description" content="Agente di commercio specializzato nella vendita di macchine per la lavorazione del ferro. Trattamento, taglio, piega, saldatura e molto altro." />
+  <title>IronTech – Macchine per la Lavorazione del Ferro</title>
+  <meta name="description" content="Agente di commercio specializzato nella vendita di macchine industriali per la lavorazione del ferro. Taglio, piega, saldatura, plasma, laser." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">IRON<span>TECH</span></div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+      <div class="loader-text">Inizializzazione sistema...</div>
+    </div>
+  </div>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
   <!-- HEADER -->
   <header id="header">
-    <div class="container header-inner">
+    <div class="header-inner">
       <a href="#" class="logo">
-        <span class="logo-icon">⚙</span>
-        <span class="logo-text">Ferro<strong>&amp;Macchine</strong></span>
+        <span class="logo-bracket">[</span>IRON<span class="logo-accent">TECH</span><span class="logo-bracket">]</span>
       </a>
       <nav id="nav">
         <ul>
-          <li><a href="#prodotti">Prodotti</a></li>
-          <li><a href="#servizi">Servizi</a></li>
-          <li><a href="#chi-siamo">Chi Siamo</a></li>
-          <li><a href="#contatti" class="btn-nav">Contattaci</a></li>
+          <li><a href="#prodotti"><span class="nav-num">01</span>Prodotti</a></li>
+          <li><a href="#servizi"><span class="nav-num">02</span>Servizi</a></li>
+          <li><a href="#chi-siamo"><span class="nav-num">03</span>Chi Siamo</a></li>
+          <li><a href="#contatti" class="btn-nav">Contattaci <span class="btn-arrow">→</span></a></li>
         </ul>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Apri menu">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="container hero-content">
-      <span class="badge">Agente di Commercio Autorizzato</span>
-      <h1>Macchine per la<br><em>Lavorazione del Ferro</em></h1>
-      <p class="hero-sub">
-        Soluzioni professionali per taglio, piega, foratura, saldatura e trattamento del metallo.
-        Rappresentiamo i migliori produttori sul mercato.
+  <section class="hero" id="hero">
+    <canvas id="particleCanvas"></canvas>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="tag-dot"></span>
+        <span>Sistema attivo — Agente di Commercio Autorizzato</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="glitch" data-text="MACCHINE">MACCHINE</span><br>
+        <span class="hero-title-sub">per la lavorazione del</span><br>
+        <span class="hero-title-accent" id="typewriter"></span><span class="cursor-blink">|</span>
+      </h1>
+      <p class="hero-desc">
+        Soluzioni industriali di ultima generazione per taglio, piega, foratura, saldatura e trattamento del metallo. Performance senza compromessi.
       </p>
       <div class="hero-cta">
-        <a href="#prodotti" class="btn btn-primary">Scopri i Prodotti</a>
-        <a href="#contatti" class="btn btn-outline">Richiedi un Preventivo</a>
+        <a href="#prodotti" class="btn-primary-neon">
+          <span class="btn-bg"></span>
+          <span class="btn-text">Esplora le Macchine</span>
+          <span class="btn-icon">⟶</span>
+        </a>
+        <a href="#contatti" class="btn-ghost">
+          Richiedi Preventivo
+        </a>
       </div>
       <div class="hero-stats">
-        <div class="stat">
-          <strong>15+</strong>
-          <span>Anni di esperienza</span>
+        <div class="stat-item">
+          <div class="stat-value"><span class="count" data-target="15">0</span>+</div>
+          <div class="stat-label">anni esperienza</div>
+          <div class="stat-line"></div>
         </div>
-        <div class="stat">
-          <strong>300+</strong>
-          <span>Clienti soddisfatti</span>
+        <div class="stat-item">
+          <div class="stat-value"><span class="count" data-target="300">0</span>+</div>
+          <div class="stat-label">clienti attivi</div>
+          <div class="stat-line"></div>
         </div>
-        <div class="stat">
-          <strong>50+</strong>
-          <span>Modelli disponibili</span>
+        <div class="stat-item">
+          <div class="stat-value"><span class="count" data-target="50">0</span>+</div>
+          <div class="stat-label">modelli disponibili</div>
+          <div class="stat-line"></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value"><span class="count" data-target="98">0</span>%</div>
+          <div class="stat-label">clienti soddisfatti</div>
+          <div class="stat-line"></div>
         </div>
       </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
     </div>
   </section>
 
   <!-- PRODOTTI -->
   <section id="prodotti" class="section">
+    <div class="section-bg-lines"></div>
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Catalogo</span>
-        <h2>Le Nostre Macchine</h2>
-        <p>Una gamma completa di macchinari industriali per ogni esigenza di lavorazione del ferro e del metallo.</p>
+        <div class="section-label"><span class="label-line"></span>CATALOGO MACCHINE<span class="label-line"></span></div>
+        <h2 class="section-title">Tecnologia <span class="neon-text">Avanzata</span><br>per ogni lavorazione</h2>
+        <p class="section-desc">Una gamma completa di macchinari industriali per ogni esigenza di produzione nel settore metallurgico.</p>
       </div>
+
       <div class="products-grid">
 
-        <div class="product-card">
-          <div class="product-icon" style="background:#1a3a5c">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="20" width="40" height="8" rx="2" fill="#fff" opacity=".9"/><rect x="12" y="8" width="4" height="32" rx="2" fill="#fff"/><rect x="32" y="8" width="4" height="32" rx="2" fill="#fff"/></svg>
+        <div class="product-card" data-index="0">
+          <div class="card-glow"></div>
+          <div class="card-border-anim"></div>
+          <div class="product-header">
+            <div class="product-icon-wrap">
+              <svg class="product-svg" viewBox="0 0 60 60"><rect x="5" y="25" width="50" height="10" rx="3" fill="currentColor" opacity=".9"/><rect x="14" y="8" width="5" height="44" rx="2.5" fill="currentColor"/><rect x="41" y="8" width="5" height="44" rx="2.5" fill="currentColor"/></svg>
+            </div>
+            <div class="product-num">01</div>
           </div>
-          <h3>Shears &amp; Cesoie</h3>
-          <p>Cesoie idrauliche e meccaniche per taglio netto di lamiere, profilati e tubi in acciaio fino a 12 mm.</p>
-          <ul class="product-features">
-            <li>Forza di taglio fino a 400 ton</li>
-            <li>Taglio a lunghezza variabile</li>
-            <li>Controllo CNC opzionale</li>
+          <h3 class="product-title">Cesoie Industriali</h3>
+          <p class="product-desc">Cesoie idrauliche e meccaniche per taglio netto di lamiere, profilati e tubi in acciaio. Massima precisione al taglio.</p>
+          <ul class="product-specs">
+            <li><span class="spec-key">Forza</span><span class="spec-val">fino a 400 ton</span></li>
+            <li><span class="spec-key">Spessore</span><span class="spec-val">fino a 12 mm</span></li>
+            <li><span class="spec-key">Controllo</span><span class="spec-val">CNC opzionale</span></li>
           </ul>
-          <a href="#contatti" class="btn btn-sm">Richiedi info</a>
+          <a href="#contatti" class="card-cta">Richiedi info <span>→</span></a>
         </div>
 
-        <div class="product-card featured">
-          <span class="product-badge">Più richiesto</span>
-          <div class="product-icon" style="background:#c0392b">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 36 L24 8 L40 36 Z" fill="#fff" opacity=".9"/><rect x="18" y="28" width="12" height="8" rx="1" fill="#fff"/></svg>
+        <div class="product-card featured-card" data-index="1">
+          <div class="card-glow glow-orange"></div>
+          <div class="card-border-anim orange"></div>
+          <div class="featured-badge">BESTSELLER</div>
+          <div class="product-header">
+            <div class="product-icon-wrap orange">
+              <svg class="product-svg" viewBox="0 0 60 60"><path d="M10 48 L30 8 L50 48 Z" fill="currentColor" opacity=".9"/><rect x="22" y="36" width="16" height="10" rx="2" fill="currentColor"/></svg>
+            </div>
+            <div class="product-num">02</div>
           </div>
-          <h3>Piegatrici</h3>
-          <p>Piegatrici a pressa (press brake) idrauliche per piegature di precisione su lamiera e profilati metallici.</p>
-          <ul class="product-features">
-            <li>Capacità fino a 320 ton</li>
-            <li>Lunghezza tavola fino a 4 m</li>
-            <li>Sistema CNC multi-asse</li>
+          <h3 class="product-title">Piegatrici CNC</h3>
+          <p class="product-desc">Press brake idrauliche di ultima generazione per piegature di alta precisione su lamiera e profilati metallici.</p>
+          <ul class="product-specs">
+            <li><span class="spec-key">Capacità</span><span class="spec-val">fino a 320 ton</span></li>
+            <li><span class="spec-key">Lunghezza</span><span class="spec-val">fino a 4 m</span></li>
+            <li><span class="spec-key">Assi CNC</span><span class="spec-val">multi-asse</span></li>
           </ul>
-          <a href="#contatti" class="btn btn-sm">Richiedi info</a>
+          <a href="#contatti" class="card-cta orange">Richiedi info <span>→</span></a>
         </div>
 
-        <div class="product-card">
-          <div class="product-icon" style="background:#27ae60">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="14" stroke="#fff" stroke-width="3" fill="none" opacity=".9"/><circle cx="24" cy="24" r="4" fill="#fff"/><line x1="24" y1="4" x2="24" y2="10" stroke="#fff" stroke-width="3"/><line x1="24" y1="38" x2="24" y2="44" stroke="#fff" stroke-width="3"/></svg>
+        <div class="product-card" data-index="2">
+          <div class="card-glow glow-green"></div>
+          <div class="card-border-anim green"></div>
+          <div class="product-header">
+            <div class="product-icon-wrap green">
+              <svg class="product-svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="18" stroke="currentColor" stroke-width="3" fill="none"/><circle cx="30" cy="30" r="5" fill="currentColor"/><line x1="30" y1="5" x2="30" y2="13" stroke="currentColor" stroke-width="3"/><line x1="30" y1="47" x2="30" y2="55" stroke="currentColor" stroke-width="3"/><line x1="5" y1="30" x2="13" y2="30" stroke="currentColor" stroke-width="3"/><line x1="47" y1="30" x2="55" y2="30" stroke="currentColor" stroke-width="3"/></svg>
+            </div>
+            <div class="product-num">03</div>
           </div>
-          <h3>Plasma &amp; Laser</h3>
-          <p>Macchine da taglio plasma e laser per profili e forme complesse, ideali per la produzione in serie.</p>
-          <ul class="product-features">
-            <li>Precisione al decimo di mm</li>
-            <li>Tavola fino a 3000×1500 mm</li>
-            <li>Software nesting incluso</li>
+          <h3 class="product-title">Taglio Plasma & Laser</h3>
+          <p class="product-desc">Sistemi di taglio al plasma e laser per profili e forme complesse. Ideali per la produzione in serie ad alta precisione.</p>
+          <ul class="product-specs">
+            <li><span class="spec-key">Precisione</span><span class="spec-val">±0.1 mm</span></li>
+            <li><span class="spec-key">Tavola</span><span class="spec-val">3000×1500 mm</span></li>
+            <li><span class="spec-key">Software</span><span class="spec-val">nesting incluso</span></li>
           </ul>
-          <a href="#contatti" class="btn btn-sm">Richiedi info</a>
+          <a href="#contatti" class="card-cta green">Richiedi info <span>→</span></a>
         </div>
 
-        <div class="product-card">
-          <div class="product-icon" style="background:#8e44ad">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="10" width="28" height="28" rx="4" stroke="#fff" stroke-width="3" fill="none" opacity=".9"/><line x1="10" y1="24" x2="38" y2="24" stroke="#fff" stroke-width="3"/><line x1="24" y1="10" x2="24" y2="38" stroke="#fff" stroke-width="3"/></svg>
+        <div class="product-card" data-index="3">
+          <div class="card-glow glow-purple"></div>
+          <div class="card-border-anim purple"></div>
+          <div class="product-header">
+            <div class="product-icon-wrap purple">
+              <svg class="product-svg" viewBox="0 0 60 60"><rect x="12" y="12" width="36" height="36" rx="5" stroke="currentColor" stroke-width="3" fill="none"/><line x1="12" y1="30" x2="48" y2="30" stroke="currentColor" stroke-width="3"/><line x1="30" y1="12" x2="30" y2="48" stroke="currentColor" stroke-width="3"/></svg>
+            </div>
+            <div class="product-num">04</div>
           </div>
-          <h3>Foratrici &amp; Alesatrici</h3>
-          <p>Foratrici a colonna e radiali per foratura di precisione su acciaio, ghisa e metalli ferrosi.</p>
-          <ul class="product-features">
-            <li>Diametro foratura fino a 80 mm</li>
-            <li>Colonna fino a 1200 mm</li>
-            <li>Testa multivelocità</li>
+          <h3 class="product-title">Foratrici & Alesatrici</h3>
+          <p class="product-desc">Foratrici a colonna e radiali per foratura di precisione su acciaio, ghisa e metalli ferrosi di ogni dimensione.</p>
+          <ul class="product-specs">
+            <li><span class="spec-key">Diametro</span><span class="spec-val">fino a 80 mm</span></li>
+            <li><span class="spec-key">Colonna</span><span class="spec-val">fino a 1200 mm</span></li>
+            <li><span class="spec-key">Velocità</span><span class="spec-val">multivelocità</span></li>
           </ul>
-          <a href="#contatti" class="btn btn-sm">Richiedi info</a>
+          <a href="#contatti" class="card-cta purple">Richiedi info <span>→</span></a>
         </div>
 
-        <div class="product-card">
-          <div class="product-icon" style="background:#d35400">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="16" width="36" height="16" rx="3" fill="#fff" opacity=".9"/><rect x="14" y="10" width="20" height="6" rx="2" fill="#fff" opacity=".7"/><rect x="18" y="32" width="12" height="6" rx="2" fill="#fff" opacity=".7"/></svg>
+        <div class="product-card" data-index="4">
+          <div class="card-glow glow-red"></div>
+          <div class="card-border-anim red"></div>
+          <div class="product-header">
+            <div class="product-icon-wrap red">
+              <svg class="product-svg" viewBox="0 0 60 60"><rect x="8" y="20" width="44" height="20" rx="4" fill="currentColor" opacity=".9"/><rect x="16" y="12" width="28" height="8" rx="2" fill="currentColor" opacity=".7"/><rect x="20" y="40" width="20" height="8" rx="2" fill="currentColor" opacity=".7"/></svg>
+            </div>
+            <div class="product-num">05</div>
           </div>
-          <h3>Saldatrici Industriali</h3>
-          <p>Saldatrici MIG, TIG e a elettrodo per ogni tipo di applicazione su ferro, acciaio inox e alluminio.</p>
-          <ul class="product-features">
-            <li>Corrente fino a 500 A</li>
-            <li>Duty cycle fino al 100%</li>
-            <li>Saldatura robotizzata disponibile</li>
+          <h3 class="product-title">Saldatrici Industriali</h3>
+          <p class="product-desc">Saldatrici MIG, TIG e a elettrodo per ogni applicazione su ferro, acciaio inox e alluminio. Qualità professionale.</p>
+          <ul class="product-specs">
+            <li><span class="spec-key">Corrente</span><span class="spec-val">fino a 500 A</span></li>
+            <li><span class="spec-key">Duty cycle</span><span class="spec-val">fino al 100%</span></li>
+            <li><span class="spec-key">Robotizzata</span><span class="spec-val">disponibile</span></li>
           </ul>
-          <a href="#contatti" class="btn btn-sm">Richiedi info</a>
+          <a href="#contatti" class="card-cta red">Richiedi info <span>→</span></a>
         </div>
 
-        <div class="product-card">
-          <div class="product-icon" style="background:#2c3e50">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="32" height="32" rx="4" stroke="#fff" stroke-width="3" fill="none" opacity=".9"/><path d="M16 24 Q24 14 32 24 Q24 34 16 24Z" fill="#fff" opacity=".9"/></svg>
+        <div class="product-card" data-index="5">
+          <div class="card-glow"></div>
+          <div class="card-border-anim"></div>
+          <div class="product-header">
+            <div class="product-icon-wrap">
+              <svg class="product-svg" viewBox="0 0 60 60"><rect x="10" y="10" width="40" height="40" rx="5" stroke="currentColor" stroke-width="3" fill="none"/><path d="M18 30 Q30 16 42 30 Q30 44 18 30Z" fill="currentColor" opacity=".9"/></svg>
+            </div>
+            <div class="product-num">06</div>
           </div>
-          <h3>Torni &amp; Fresatrici</h3>
-          <p>Torni paralleli e fresatrici verticali per lavorazioni di tornitura e fresatura su pezzi metallici.</p>
-          <ul class="product-features">
-            <li>Distanza tra le punte fino a 3 m</li>
-            <li>Controllo CNC multi-asse</li>
-            <li>Alta precisione dimensionale</li>
+          <h3 class="product-title">Torni & Fresatrici</h3>
+          <p class="product-desc">Torni paralleli e fresatrici verticali CNC per lavorazioni di alta precisione su acciaio, ghisa e leghe metalliche.</p>
+          <ul class="product-specs">
+            <li><span class="spec-key">Punte</span><span class="spec-val">fino a 3 m</span></li>
+            <li><span class="spec-key">Controllo</span><span class="spec-val">CNC multi-asse</span></li>
+            <li><span class="spec-key">Precisione</span><span class="spec-val">±0.01 mm</span></li>
           </ul>
-          <a href="#contatti" class="btn btn-sm">Richiedi info</a>
+          <a href="#contatti" class="card-cta">Richiedi info <span>→</span></a>
         </div>
 
       </div>
@@ -163,43 +232,66 @@
   </section>
 
   <!-- SERVIZI -->
-  <section id="servizi" class="section section-alt">
+  <section id="servizi" class="section section-dark">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Cosa offriamo</span>
-        <h2>I Nostri Servizi</h2>
-        <p>Non vendiamo solo macchine: offriamo un supporto completo prima, durante e dopo l'acquisto.</p>
+        <div class="section-label"><span class="label-line"></span>SERVIZI<span class="label-line"></span></div>
+        <h2 class="section-title">Supporto <span class="neon-text">Completo</span><br>a 360 gradi</h2>
       </div>
       <div class="services-grid">
-        <div class="service-item">
-          <div class="service-icon">🔍</div>
+        <div class="service-card reveal-item">
+          <div class="service-icon-wrap">
+            <span class="service-icon">🔍</span>
+            <div class="service-icon-ring"></div>
+          </div>
           <h3>Consulenza Tecnica</h3>
-          <p>Analizziamo le tue esigenze produttive e ti consigliamo la macchina più adatta al tuo ciclo di lavoro e al tuo budget.</p>
+          <p>Analizziamo il tuo ciclo produttivo e identifichiamo la macchina ottimale per le tue esigenze e il tuo budget.</p>
+          <div class="service-line"></div>
         </div>
-        <div class="service-item">
-          <div class="service-icon">🚚</div>
-          <h3>Consegna e Installazione</h3>
-          <p>Gestiamo trasporto, scarico, posizionamento e collaudo delle macchine direttamente nel tuo stabilimento.</p>
+        <div class="service-card reveal-item">
+          <div class="service-icon-wrap">
+            <span class="service-icon">🚚</span>
+            <div class="service-icon-ring"></div>
+          </div>
+          <h3>Consegna & Installazione</h3>
+          <p>Gestiamo trasporto, scarico, posizionamento e collaudo direttamente nel tuo stabilimento produttivo.</p>
+          <div class="service-line"></div>
         </div>
-        <div class="service-item">
-          <div class="service-icon">🎓</div>
+        <div class="service-card reveal-item">
+          <div class="service-icon-wrap">
+            <span class="service-icon">🎓</span>
+            <div class="service-icon-ring"></div>
+          </div>
           <h3>Formazione Operatori</h3>
-          <p>Formiamo il tuo personale all'uso sicuro e ottimale delle macchine, con sessioni pratiche in loco.</p>
+          <p>Formiamo il tuo personale all'uso sicuro e ottimale delle macchine con sessioni pratiche in loco.</p>
+          <div class="service-line"></div>
         </div>
-        <div class="service-item">
-          <div class="service-icon">🔧</div>
+        <div class="service-card reveal-item">
+          <div class="service-icon-wrap">
+            <span class="service-icon">🔧</span>
+            <div class="service-icon-ring"></div>
+          </div>
           <h3>Assistenza Post-Vendita</h3>
           <p>Rete di tecnici autorizzati per manutenzione ordinaria, straordinaria e fornitura di ricambi originali.</p>
+          <div class="service-line"></div>
         </div>
-        <div class="service-item">
-          <div class="service-icon">💳</div>
-          <h3>Finanziamenti &amp; Leasing</h3>
-          <p>Collaboriamo con istituti finanziari per offrirti soluzioni di pagamento flessibili e accesso agli incentivi Industria 4.0.</p>
+        <div class="service-card reveal-item">
+          <div class="service-icon-wrap">
+            <span class="service-icon">💳</span>
+            <div class="service-icon-ring"></div>
+          </div>
+          <h3>Finanziamenti & Leasing</h3>
+          <p>Soluzioni di pagamento flessibili e accesso agli incentivi Transizione 4.0 per massimizzare il tuo investimento.</p>
+          <div class="service-line"></div>
         </div>
-        <div class="service-item">
-          <div class="service-icon">♻️</div>
+        <div class="service-card reveal-item">
+          <div class="service-icon-wrap">
+            <span class="service-icon">♻️</span>
+            <div class="service-icon-ring"></div>
+          </div>
           <h3>Ritiro Usato</h3>
           <p>Valutiamo e ritiriamo la tua vecchia attrezzatura, abbattendo il costo d'acquisto del nuovo macchinario.</p>
+          <div class="service-line"></div>
         </div>
       </div>
     </div>
@@ -207,51 +299,51 @@
 
   <!-- CHI SIAMO -->
   <section id="chi-siamo" class="section">
-    <div class="container about-grid">
-      <div class="about-text">
-        <span class="section-tag">Chi Siamo</span>
-        <h2>Un agente di fiducia<br>al tuo fianco</h2>
-        <p>
-          Da oltre 15 anni opero come agente di commercio nel settore delle macchine utensili per la lavorazione del ferro e del metallo,
-          costruendo relazioni durature con officine meccaniche, carpenterie metalliche e industrie manifatturiere.
-        </p>
-        <p>
-          Rappresento marchi di primo livello europei e asiatici, selezionati per qualità, affidabilità e rapporto qualità-prezzo.
-          Il mio obiettivo è trovare la soluzione giusta per ogni cliente, grande o piccolo che sia.
-        </p>
-        <div class="about-highlights">
-          <div class="highlight">
-            <strong>✓</strong> Zona di competenza: Nord e Centro Italia
+    <div class="container about-layout">
+      <div class="about-left reveal-item">
+        <div class="section-label left"><span class="label-line"></span>CHI SIAMO</div>
+        <h2 class="section-title">Un agente<br><span class="neon-text">di fiducia</span><br>al tuo fianco</h2>
+        <p class="about-text">Da oltre 15 anni opero come agente di commercio nel settore delle macchine utensili, costruendo relazioni durature con officine meccaniche, carpenterie metalliche e industrie manifatturiere di tutta Italia.</p>
+        <p class="about-text">Rappresento marchi di primo livello europei e asiatici, selezionati per qualità, affidabilità e rapporto qualità-prezzo.</p>
+        <div class="about-skills">
+          <div class="skill-row">
+            <span class="skill-name">Soddisfazione cliente</span>
+            <div class="skill-bar"><div class="skill-fill" data-width="98"></div></div>
+            <span class="skill-pct">98%</span>
           </div>
-          <div class="highlight">
-            <strong>✓</strong> Visite dimostrative in officina
+          <div class="skill-row">
+            <span class="skill-name">Competenza tecnica</span>
+            <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+            <span class="skill-pct">95%</span>
           </div>
-          <div class="highlight">
-            <strong>✓</strong> Accesso agli incentivi Transizione 4.0
-          </div>
-          <div class="highlight">
-            <strong>✓</strong> Garanzie fino a 3 anni
+          <div class="skill-row">
+            <span class="skill-name">Puntualità consegne</span>
+            <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+            <span class="skill-pct">92%</span>
           </div>
         </div>
       </div>
-      <div class="about-visual">
-        <div class="about-card">
-          <div class="about-card-inner">
-            <div class="big-number">15<span>+</span></div>
-            <p>anni nel settore</p>
+      <div class="about-right">
+        <div class="about-big-card reveal-item">
+          <div class="big-num">15<span class="big-plus">+</span></div>
+          <div class="big-label">anni nel settore</div>
+          <div class="card-circuit"></div>
+        </div>
+        <div class="testimonial-card reveal-item">
+          <div class="quote-icon">"</div>
+          <p>"Professionalità e competenza. Ha trovato la piegatrice che cercavamo nel budget che avevamo."</p>
+          <div class="testimonial-author">
+            <div class="author-dot"></div>
+            <span>Marco R. — Carpenteria Metallica, Milano</span>
           </div>
         </div>
-        <div class="testimonial">
-          <blockquote>
-            "Professionalità, competenza e disponibilità. Ha trovato esattamente la piegatrice che cercavamo, nel budget che avevamo."
-          </blockquote>
-          <cite>— Marco R., Carpenteria Metallica, Milano</cite>
-        </div>
-        <div class="testimonial">
-          <blockquote>
-            "Assistenza rapida e puntuale. Consiglio vivamente a chiunque voglia investire in macchinari di qualità."
-          </blockquote>
-          <cite>— Luca T., Officina Meccanica, Bologna</cite>
+        <div class="testimonial-card reveal-item">
+          <div class="quote-icon">"</div>
+          <p>"Assistenza rapida e puntuale. Consiglio a chiunque voglia investire in macchinari di qualità."</p>
+          <div class="testimonial-author">
+            <div class="author-dot orange"></div>
+            <span>Luca T. — Officina Meccanica, Bologna</span>
+          </div>
         </div>
       </div>
     </div>
@@ -260,89 +352,100 @@
   <!-- CONTATTI -->
   <section id="contatti" class="section section-dark">
     <div class="container">
-      <div class="section-header light">
-        <span class="section-tag">Contatti</span>
-        <h2>Parliamo del tuo progetto</h2>
-        <p>Compila il modulo o contattami direttamente. Rispondo entro 24 ore lavorative.</p>
+      <div class="section-header">
+        <div class="section-label"><span class="label-line"></span>CONTATTI<span class="label-line"></span></div>
+        <h2 class="section-title">Inizia il tuo<br><span class="neon-text">Progetto</span></h2>
+        <p class="section-desc">Compila il form oppure contattami direttamente. Rispondo entro 24 ore lavorative.</p>
       </div>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <div class="contact-item">
-            <span class="contact-icon">📞</span>
+      <div class="contact-layout">
+        <div class="contact-info reveal-item">
+          <div class="info-item">
+            <div class="info-icon">📞</div>
             <div>
-              <strong>Telefono / WhatsApp</strong>
-              <a href="tel:+393001234567">+39 300 123 4567</a>
+              <div class="info-label">Telefono / WhatsApp</div>
+              <a href="tel:+393001234567" class="info-value">+39 300 123 4567</a>
             </div>
           </div>
-          <div class="contact-item">
-            <span class="contact-icon">✉️</span>
+          <div class="info-item">
+            <div class="info-icon">✉️</div>
             <div>
-              <strong>Email</strong>
-              <a href="mailto:info@ferromacchine.it">info@ferromacchine.it</a>
+              <div class="info-label">Email</div>
+              <a href="mailto:info@irontech.it" class="info-value">info@irontech.it</a>
             </div>
           </div>
-          <div class="contact-item">
-            <span class="contact-icon">📍</span>
+          <div class="info-item">
+            <div class="info-icon">📍</div>
             <div>
-              <strong>Zona operativa</strong>
-              <span>Nord e Centro Italia</span>
+              <div class="info-label">Zona operativa</div>
+              <span class="info-value">Nord e Centro Italia</span>
             </div>
           </div>
-          <div class="contact-item">
-            <span class="contact-icon">🕐</span>
+          <div class="info-item">
+            <div class="info-icon">🕐</div>
             <div>
-              <strong>Orari</strong>
-              <span>Lun–Ven: 8:00–18:00</span>
+              <div class="info-label">Orari</div>
+              <span class="info-value">Lun–Ven: 8:00–18:00</span>
             </div>
+          </div>
+          <div class="contact-badge">
+            <div class="badge-dot"></div>
+            <span>Disponibile per consulenza gratuita</span>
           </div>
         </div>
-        <form class="contact-form" id="contactForm" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nome">Nome e Cognome *</label>
-              <input type="text" id="nome" name="nome" placeholder="Mario Rossi" required />
+        <form class="contact-form reveal-item" id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Nome e Cognome *</label>
+              <input type="text" name="nome" placeholder="Mario Rossi" required />
+              <div class="field-line"></div>
             </div>
-            <div class="form-group">
-              <label for="azienda">Azienda</label>
-              <input type="text" id="azienda" name="azienda" placeholder="Nome azienda" />
+            <div class="form-field">
+              <label>Azienda</label>
+              <input type="text" name="azienda" placeholder="Nome azienda" />
+              <div class="field-line"></div>
+            </div>
+            <div class="form-field">
+              <label>Email *</label>
+              <input type="email" name="email" placeholder="mario@azienda.it" required />
+              <div class="field-line"></div>
+            </div>
+            <div class="form-field">
+              <label>Telefono</label>
+              <input type="tel" name="telefono" placeholder="+39 000 000 0000" />
+              <div class="field-line"></div>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" placeholder="mario@azienda.it" required />
-            </div>
-            <div class="form-group">
-              <label for="telefono">Telefono</label>
-              <input type="tel" id="telefono" name="telefono" placeholder="+39 000 000 0000" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="interesse">Prodotto di interesse</label>
-            <select id="interesse" name="interesse">
-              <option value="">-- Seleziona --</option>
-              <option>Cesoie / Shears</option>
-              <option>Piegatrici</option>
+          <div class="form-field">
+            <label>Prodotto di interesse</label>
+            <select name="interesse">
+              <option value="">— Seleziona —</option>
+              <option>Cesoie Industriali</option>
+              <option>Piegatrici CNC</option>
               <option>Taglio Plasma / Laser</option>
               <option>Foratrici</option>
               <option>Saldatrici</option>
               <option>Torni / Fresatrici</option>
               <option>Altro</option>
             </select>
+            <div class="field-line"></div>
           </div>
-          <div class="form-group">
-            <label for="messaggio">Messaggio *</label>
-            <textarea id="messaggio" name="messaggio" rows="4" placeholder="Descrivi le tue esigenze, specifiche tecniche richieste, budget indicativo..." required></textarea>
+          <div class="form-field">
+            <label>Messaggio *</label>
+            <textarea name="messaggio" rows="4" placeholder="Descrivi le tue esigenze, specifiche tecniche, budget indicativo..." required></textarea>
+            <div class="field-line"></div>
           </div>
           <div class="form-check">
             <input type="checkbox" id="privacy" name="privacy" required />
-            <label for="privacy">Ho letto e accetto la <a href="#" class="link-inline">Privacy Policy</a> *</label>
+            <label for="privacy">Ho letto e accetto la <a href="#" class="link-neon">Privacy Policy</a> *</label>
           </div>
-          <button type="submit" class="btn btn-primary btn-full">
-            <span>Invia Richiesta</span>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="submit-bg"></span>
+            <span class="submit-text">Invia Richiesta</span>
+            <span class="submit-icon">⟶</span>
           </button>
           <div class="form-success" id="formSuccess">
-            ✅ Messaggio inviato! Ti contatterò al più presto.
+            <span class="success-icon">✓</span>
+            Messaggio inviato! Ti contatterò al più presto.
           </div>
         </form>
       </div>
@@ -351,42 +454,41 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="#" class="logo">
-          <span class="logo-icon">⚙</span>
-          <span class="logo-text">Ferro<strong>&amp;Macchine</strong></span>
-        </a>
-        <p>Agente di commercio specializzato<br>nella vendita di macchine per la lavorazione del ferro.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Prodotti</h4>
-        <ul>
-          <li><a href="#prodotti">Cesoie</a></li>
-          <li><a href="#prodotti">Piegatrici</a></li>
-          <li><a href="#prodotti">Plasma &amp; Laser</a></li>
-          <li><a href="#prodotti">Saldatrici</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>Azienda</h4>
-        <ul>
-          <li><a href="#chi-siamo">Chi Siamo</a></li>
-          <li><a href="#servizi">Servizi</a></li>
-          <li><a href="#contatti">Contatti</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>Legale</h4>
-        <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Cookie Policy</a></li>
-          <li><a href="#">Note Legali</a></li>
-        </ul>
+    <div class="footer-top">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo"><span class="logo-bracket">[</span>IRON<span class="logo-accent">TECH</span><span class="logo-bracket">]</span></div>
+          <p>Agente di commercio specializzato nella vendita di macchine industriali per la lavorazione del ferro.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Prodotti</h4>
+          <ul>
+            <li><a href="#prodotti">Cesoie</a></li>
+            <li><a href="#prodotti">Piegatrici CNC</a></li>
+            <li><a href="#prodotti">Plasma & Laser</a></li>
+            <li><a href="#prodotti">Saldatrici</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Azienda</h4>
+          <ul>
+            <li><a href="#chi-siamo">Chi Siamo</a></li>
+            <li><a href="#servizi">Servizi</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Legale</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Note Legali</a></li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 Ferro&amp;Macchine – P.IVA 00000000000 – Agente di Commercio iscritto all'Enasarco</p>
+      <p>© 2025 IronTech — P.IVA 00000000000 — Agente di Commercio iscritto all'Enasarco</p>
     </div>
   </footer>
 
